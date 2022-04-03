@@ -1,20 +1,23 @@
 package main
 
 import (
-	"fmt"
-	"github.com/sirupsen/logrus"
+	"context"
+	"log"
+
+	worker "learn-go/goroutine"
 	"learn-go/handle_error"
-	"os"
 )
 
-var log = logrus.New()
-
 func main() {
-	log.Out = os.Stdout
+	ctx := context.Background()
 
+	// Week 2 - Error Handling
 	service := handle_error.NewStudentService()
 	_, err := service.GetByID(1)
 	if err != nil {
-		log.Error(fmt.Printf("stack trace: \n%+v\n", err))
+		log.Printf("stack trace: \n%+v\n", err)
 	}
+
+	//	Week 3 - Goroutine
+	worker.Run(ctx)
 }
