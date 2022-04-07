@@ -38,7 +38,7 @@ func Run(ctx context.Context) {
 
 	errGroup.Go(func() error {
 		fmt.Println("start http server")
-		return Start(server, "hello")
+		return Start(server, "/hello")
 	})
 
 	errGroup.Go(func() error {

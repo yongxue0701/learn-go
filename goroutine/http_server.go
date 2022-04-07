@@ -2,16 +2,14 @@ package goroutine
 
 import (
 	"context"
-	"io"
+	"fmt"
 	"net/http"
 )
 
-func HTTPServer(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "Successful")
-}
-
 func Start(server *http.Server, path string) error {
-	http.HandleFunc(path, HTTPServer)
+	http.HandleFunc(path, func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprint(w, "Welcome to my web server!")
+	})
 	return server.ListenAndServe()
 }
 
